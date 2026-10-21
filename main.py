@@ -23,11 +23,9 @@ from telethon import TelegramClient, events, functions, types
 MEDIA_DIR = "media_downloads"
 os.makedirs(MEDIA_DIR, exist_ok=True)
 
-# Универсальные встроенные ключи Telegram под капотом (пользователю вводить не нужно)
 DEFAULT_API_ID = 6
 DEFAULT_API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
 
-# Глобальные переменные состояния юзербота
 AFK_RU_DEFAULT = "Привет! Сейчас я занят и не могу ответить, чуть позже обязательно отпишу."
 is_afk = True
 global_muted = False
@@ -57,7 +55,7 @@ class LoginScreen(Screen):
         super().__init__(**kwargs)
         layout = BoxLayout(orientation='vertical', padding=25, spacing=15)
         
-        layout.add_widget(Label(text="[b]ZONAR: Шаг 1 из 3[/b]\nНастройка бота и ника", markup=True, font_size=20, halign="center"))
+        layout.add_widget(Label(text="[b]Шаг 1 из 3[/b]\nНастройка бота и ника", markup=True, font_size=20, halign="center"))
 
         layout.add_widget(Label(text="Токен вашего управляющего бота:"))
         self.bot_token = TextInput(text="8547908899:AAEB-cR-j-H7M8VOTZ6BZ7OplIevQfLsTNA", multiline=False)
@@ -86,7 +84,7 @@ class PhoneScreen(Screen):
         super().__init__(**kwargs)
         layout = BoxLayout(orientation='vertical', padding=25, spacing=15)
         
-        layout.add_widget(Label(text="[b]ZONAR: Шаг 2 из 3[/b]\nВведите номер телефона", markup=True, font_size=20, halign="center"))
+        layout.add_widget(Label(text="[b]Шаг 2 из 3[/b]\nВведите номер телефона", markup=True, font_size=20, halign="center"))
         layout.add_widget(Label(text="Укажите номер в международном формате\n(например: +380XXXXXXXXX):", font_size=14))
 
         self.phone_input = TextInput(hint_text="+380...", multiline=False, font_size=18)
@@ -115,7 +113,7 @@ class CodeScreen(Screen):
         super().__init__(**kwargs)
         layout = BoxLayout(orientation='vertical', padding=25, spacing=15)
         
-        layout.add_widget(Label(text="[b]ZONAR: Шаг 3 из 3[/b]\nВведите код из Telegram", markup=True, font_size=20, halign="center"))
+        layout.add_widget(Label(text="[b]Шаг 3 из 3[/b]\nВведите код из Telegram", markup=True, font_size=20, halign="center"))
         layout.add_widget(Label(text="Код подтверждения пришел вам\nв официальном аккаунте Telegram:", font_size=14))
 
         self.code_input = TextInput(hint_text="12345", multiline=False, font_size=22)
@@ -190,7 +188,7 @@ class ControlPanelScreen(Screen):
 # --- ГЛАВНОЕ ПРИЛОЖЕНИЕ ---
 class UserbotApp(App):
     def build(self):
-        self.title = "ZONAR Userbot"
+        self.title = "Юзербот"
         self.config_data = {}
         self.phone_code_future = None
 
@@ -235,7 +233,7 @@ class UserbotApp(App):
                 @bot_client.on(events.NewMessage(pattern='/start'))
                 async def start_handler(event):
                     if event.sender_id == owner_id:
-                        await event.respond("🛠 **ZONAR Userbot успешно управляется через APK!**")
+                        await event.respond("🛠 **Юзербот успешно управляется через APK!**")
 
             self.register_all_handlers(client, bot_client, owner_id)
             Clock.schedule_once(lambda dt: setattr(self.screen_manager, 'current', 'control_screen'), 0)
